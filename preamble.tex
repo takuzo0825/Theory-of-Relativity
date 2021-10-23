@@ -1,0 +1,89 @@
+%%% luaLaTeX
+\usepackage{luatexja}% LuaLaTexの日本語化
+\usepackage{luatexja-fontspec} 
+\usepackage[haranoaji,nfssonly]{luatexja-preset} % 原ノ味フォント
+%%% 目次
+%目次でどこまで表示するか 3:subsubsectionまで 2:subsectionまで
+\setcounter{tocdepth}{2}
+\usepackage[shortlabels]{enumitem}
+\newcommand\boldred[1]{\textcolor{red!60!black}{\textbf{#1}}}
+%%% 数式
+\usepackage{amsmath,amssymb}
+\usepackage{mathtools}
+\usepackage{empheq} % 連立方程式
+\numberwithin{equation}{section}
+\DeclareMathOperator{\id}{id}
+%%% 定理
+\usepackage{tcolorbox}
+    \tcbuselibrary{breakable, skins, theorems}
+    \tcbset{enhanced,fonttitle=\bfseries,boxrule=0pt,frame hidden,
+        detach title, before upper={\tcbtitle\par},
+        separator sign none,colback=white,
+        description delimiters parenthesis}
+    \newtcbtheorem[number within=chapter,list inside={Dfn}]{dfn}{定義}{
+        coltitle=red!60!black,colback=red!5!white
+    }{dfn}
+    \newtcbtheorem[use counter from=dfn,list inside={Thm}]{lem}{補題}{
+        coltitle=blue!60!black,colback=blue!5!white
+    }{lem}
+    \newtcbtheorem[use counter from=dfn,list inside={Thm}]{prop}{命題}{
+        coltitle=blue!60!black,colback=blue!5!white
+    }{prop}
+    \newcommand{\propref}[1]{命題~\ref{prop:#1}}
+    \newtcbtheorem[use counter from=dfn,list inside={Thm}]{thm}{定理}{
+        coltitle=blue!60!black,colback=blue!5!white
+    }{thm}
+    \newcommand{\thmref}[1]{定理~\ref{thm:#1}}
+    \newtcbtheorem{exm}{例}{
+        coltitle=black,borderline west = {1pt}{0pt}{black}
+    }{exm}
+    \newtcbtheorem{prf}{証明}{
+        coltitle=black,colback=black!5!white,after upper={\hfill$\Box$}
+    }{proof}
+%%% 物理
+\usepackage{physics}
+\usepackage{siunitx}
+\sisetup{per-mode = symbol}
+%%% 化学
+\usepackage[version=3]{mhchem}
+%%% 画像
+\usepackage{graphicx}
+\usepackage{subcaption}
+\renewcommand{\figurename}{図}
+%%% ハイパーリンク
+\usepackage{hyperref}
+%%% 参照
+\usepackage{cleveref}
+\newcommand{\crefrangeconjunction}{--} % 3つ以上連番で参照するときの表記を設定
+\crefname{equation}{式}{式}
+\Crefname{equation}{式}{式}
+\crefname{dfn}{定義}{定義}
+\Crefname{dfn}{定義}{定義}
+\crefname{lem}{補題}{補題}
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{chapter}{第}{第}
+\creflabelformat{chapter}{#2#1章#3}
+\crefname{section}{第}{第}
+\creflabelformat{section}{#2#1節#3}
+\crefname{subsection}{第}{第}
+\creflabelformat{subsection}{#2#1項#3}
+\crefname{subsubsection}{第}{第}
+\creflabelformat{subsubsection}{#2#1目#3}
+\newcommand{\crefpairconjunction}{と}
+\renewcommand{\crefrangeconjunction}{から}
+\newcommand{\crefmiddleconjunction}{，}
+\newcommand{\creflastconjunction}{，および}
+%%% 参考文献
+% bibtex
+\usepackage{url}
+\usepackage[backend = biber,style = phys]{biblatex}
+\ExecuteBibliographyOptions{%
+    sorting = none, % 引用リストの表示順
+    sortcites = true, % 本文での引用順番
+    maxnames = 8, %
+}
+\bibliography{ref.bib}
+%%% ファイル分割
+\usepackage{subfiles}
+%%%

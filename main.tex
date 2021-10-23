@@ -1,0 +1,28 @@
+\documentclass[12pt]{ltjsreport}
+
+\input{preamble.tex}
+
+\title{一般相対性理論}
+\author{Takuzone\thanks{\url{https://twitter.com/TakuzoneMaphy}}}
+\date{\today}
+
+\begin{document}
+    % 表紙
+    \maketitle
+    
+    % 目次
+    \tableofcontents
+    \clearpage
+
+    % 第0章 まえがき
+    \addcontentsline{toc}{chapter}{まえがき}
+    \subfile{contents/Introduction.tex}
+
+    % 第1章 多様体論
+    \subfile{contents/manifold.tex}
+    
+    % 参考文献
+    \addcontentsline{toc}{chapter}{参考文献}
+    \printbibliography[title=参考文献]
+    
+\end{document}
