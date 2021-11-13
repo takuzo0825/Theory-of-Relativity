@@ -1,58 +1,60 @@
 %%% luaLaTeX
-\usepackage{luatexja}% LuaLaTexの日本語化
-\usepackage{luatexja-fontspec} 
-\usepackage[haranoaji,nfssonly]{luatexja-preset} % 原ノ味フォント
-%%% 目次
-%目次でどこまで表示するか 3:subsubsectionまで 2:subsectionまで
+\usepackage{luatexja}
+% \usepackage{luatexja-fontspec}
+\usepackage[no-math,deluxe,expert,haranoaji]{luatexja-preset}
+%%% Table of Contents
 \setcounter{tocdepth}{2}
+%%% Itemization
 \usepackage[shortlabels]{enumitem}
-\newcommand\boldred[1]{\textcolor{red!60!black}{\textbf{#1}}}
-%%% 数式
-\usepackage{amsmath,amssymb}
-\usepackage{mathtools}
-\usepackage{empheq} % 連立方程式
-\numberwithin{equation}{section}
-\DeclareMathOperator{\id}{id}
-%%% 定理
-\usepackage{tcolorbox}
-    \tcbuselibrary{breakable, skins, theorems}
-    \tcbset{enhanced,fonttitle=\bfseries,boxrule=0pt,frame hidden,
-        detach title, before upper={\tcbtitle\par},
-        separator sign none,colback=white,
-        description delimiters parenthesis}
-    \newtcbtheorem[number within=chapter,list inside={Dfn}]{dfn}{定義}{
-        coltitle=red!60!black,colback=red!5!white
-    }{dfn}
-    \newtcbtheorem[use counter from=dfn,list inside={Thm}]{lem}{補題}{
-        coltitle=blue!60!black,colback=blue!5!white
-    }{lem}
-    \newtcbtheorem[use counter from=dfn,list inside={Thm}]{prop}{命題}{
-        coltitle=blue!60!black,colback=blue!5!white
-    }{prop}
-    \newcommand{\propref}[1]{命題~\ref{prop:#1}}
-    \newtcbtheorem[use counter from=dfn,list inside={Thm}]{thm}{定理}{
-        coltitle=blue!60!black,colback=blue!5!white
-    }{thm}
-    \newcommand{\thmref}[1]{定理~\ref{thm:#1}}
-    \newtcbtheorem{exm}{例}{
-        coltitle=black,borderline west = {1pt}{0pt}{black}
-    }{exm}
-    \newtcbtheorem{prf}{証明}{
-        coltitle=black,colback=black!5!white,after upper={\hfill$\Box$}
-    }{proof}
-%%% 物理
-\usepackage{physics}
-\usepackage{siunitx}
-\sisetup{per-mode = symbol}
-%%% 化学
-\usepackage[version=3]{mhchem}
-%%% 画像
-\usepackage{graphicx}
-\usepackage{subcaption}
+%%% Figure
 \renewcommand{\figurename}{図}
-%%% ハイパーリンク
+\usepackage{xcolor}
+\usepackage{caption}
+\captionsetup{format=hang,justification=raggedright}
+\usepackage{subcaption}
+\captionsetup[sub]{
+    skip=0pt,subrefformat=simple,labelformat=simple,
+    justification=raggedright,singlelinecheck=false
+}
+\renewcommand\thesubfigure{\,(\alph{subfigure})}
+\usepackage{tikz}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+\tcbset{enhanced,fonttitle=\bfseries,boxrule=0pt,frame hidden,
+    detach title, before upper={\tcbtitle\par},
+    separator sign none,colback=white,
+    description delimiters parenthesis}
+\newtcbtheorem[number within=chapter,list inside={Dfn}]{dfn}{定義}{
+    coltitle=red!60!black,colback=red!5!white
+}{dfn}
+\newtcbtheorem[use counter from=dfn,list inside={Thm}]{lem}{補題}{
+    coltitle=blue!60!black,colback=blue!5!white
+}{lem}
+\newtcbtheorem[use counter from=dfn,list inside={Thm}]{prop}{命題}{
+    coltitle=blue!60!black,colback=blue!5!white
+}{prop}
+\newcommand{\propref}[1]{命題~\ref{prop:#1}}
+\newtcbtheorem[use counter from=dfn,list inside={Thm}]{thm}{定理}{
+    coltitle=blue!60!black,colback=blue!5!white
+}{thm}
+\newcommand{\thmref}[1]{定理~\ref{thm:#1}}
+\newtcbtheorem{exm}{例}{
+    breakable,coltitle=black,borderline west = {1pt}{0pt}{black}
+}{exm}
+\newtcbtheorem{prf}{証明}{
+    breakable,coltitle=black,colback=black!5!white,after upper={\hfill$\Box$}
+}{proof}
+%%% Link
+\usepackage{url}
 \usepackage{hyperref}
-%%% 参照
+\hypersetup{
+	colorlinks=false, % リンクに色をつけない設定
+	bookmarks=true, % 以下ブックマークに関する設定
+	bookmarksnumbered=true,
+	pdfborder={0 0 0},
+	bookmarkstype=toc
+}
+%%% Reference
 \usepackage{cleveref}
 \newcommand{\crefrangeconjunction}{--} % 3つ以上連番で参照するときの表記を設定
 \crefname{equation}{式}{式}
@@ -74,9 +76,6 @@
 \renewcommand{\crefrangeconjunction}{から}
 \newcommand{\crefmiddleconjunction}{，}
 \newcommand{\creflastconjunction}{，および}
-%%% 参考文献
-% bibtex
-\usepackage{url}
 \usepackage[backend = biber,style = phys]{biblatex}
 \ExecuteBibliographyOptions{%
     sorting = none, % 引用リストの表示順
@@ -84,6 +83,23 @@
     maxnames = 8, %
 }
 \bibliography{ref.bib}
-%%% ファイル分割
+%%% mathmatics
+\numberwithin{equation}{section}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{empheq}
+%%% Physics
+\usepackage{physics}
+\usepackage{tensor}
+\usepackage{siunitx}
+\sisetup{per-mode = symbol}
+%%% Chemical
+\usepackage[version=3]{mhchem}
+%%% File
 \usepackage{subfiles}
-%%%
+%%% User Define
+\newcommand\boldred[1]{\textcolor{red!60!black}{\textbf{#1}}}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\supp}{supp}

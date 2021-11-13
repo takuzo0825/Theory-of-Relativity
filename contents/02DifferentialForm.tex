@@ -1,0 +1,381 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+\chapter{微分形式}
+\section{余接ベクトル空間}
+    接ベクトル空間$T_p(M)$はベクトル空間であるから, 双対空間が存在する.
+    \begin{dfn}{余接ベクトル空間}{余接ベクトル空間}
+        多様体$M$の点$p$における接ベクトル空間$T_p(M)$の双対空間を, 点$p$における\boldred{余接ベクトル空間（cotangent vector space）}とよび,
+        $T_p^*(M)$で表し, その元を\boldred{余接ベクトル（cotangent vector）}という.
+        $T_p(M)$の基底$(\pdv*{x^\mu})_p$に対応する双対基底を$(\dd{x^\mu})_p:T_p(M) \mapsto \mathbb{R}$と表す.
+        \begin{equation}
+            \dd{x^\mu} \pdv{x^\nu} = \delta\indices{^\mu_\nu}
+        \end{equation}
+    \end{dfn}
+    任意の$\omega \in T_p^*(M)$は双対基底$\{\dd{x^\mu}\}$を用いて.
+    \begin{equation}
+        \omega = \omega_\mu \dd{x^\mu}
+    \end{equation}
+    と展開できる. $X=X^\mu\pdv*{x_\mu}$に作用させると,
+    \begin{equation}
+        \omega X = \omega_\mu X^\nu \dd{x^\mu} \pdv{x^\nu}
+                 = \omega_\mu X^\nu \delta\indices{^\mu_\nu}
+                 = \omega_\mu X^\mu
+    \end{equation}
+    となる.
+
+    ここで, $\omega$を２つの基底で,
+    \begin{equation*}
+        \omega = \omega_\mu \dd{x^\mu} = \widetilde{\omega}_\mu \dd{y^\mu}
+    \end{equation*}
+    と表す. 全微分の変数変換
+    \begin{equation*}
+        \dd{x^\mu} = \pdv{x^\mu}{y^\nu} \dd{y^\nu}
+    \end{equation*}
+    を代入すると, 成分は
+    \begin{equation}
+        \widetilde{\omega}_\mu = \omega_\nu \pdv{x^\nu}{y^\mu}
+    \end{equation}
+    と変換できる. このとき,
+    \begin{equation}
+        \widetilde{\omega}_\mu \widetilde{X}^\mu
+            = \omega_\nu \pdv{x^\nu}{y^\mu} X^\rho \pdv{y^\mu}{x^\rho}
+            = \omega_\nu X^\rho \pdv{x^\nu}{x^\rho}
+            = \omega_\nu X^\rho \delta\indices{^\nu_\rho}
+            = \omega_\nu X^\nu
+    \end{equation}
+    より, 局所座標に依らない.
+
+% \section{テンソル}
+%     ベクトル空間$V$上の$k$次の\textbf{多重線形形式（multi-linear form of degree $k$）}とは, Vの$k$
+%     \begin{equation}
+%         \omega:\underbrace{V \times V \times \cdots \times V}_{k}
+%             \mapsto \mathbb{R}
+%     \end{equation}
+%     であって, $\omega(X_1,X_2,\ldots,X_k)$が各$X_i$について線形空間である.
+%     \begin{dfn}{テンソル}{テンソル}
+%         $(q,r)$型の\boldred{テンソル}は,
+%     \end{dfn}
+
+\section{微分形式}
+    2変数関数の積分は変数変換をするために,
+    Jacobi行列をかけなければならない.
+    \begin{dfn}{微分形式}{微分形式}
+        $M$を$m$次元多様体, $T_p^*(M)$を点$p \in M$における余接ベクトル空間とする.
+        $\dd{x^\mu} \in T_p^*(M)$に対して,
+        $r$次\boldred{微分形式（differential form）}$\dd{x}^{\mu_1} \wedge \dd{x}^{\mu_2} \wedge \cdots \wedge \dd{x}^{\mu_r}$を次のように定義する.
+        \begin{equation}
+            \dd{x}^{\mu_1} \wedge \dd{x}^{\mu_2}
+                \wedge \cdots \wedge \dd{x}^{\mu_r}
+            \coloneqq \sum_{P \in S_r} \sgn(P)
+                    \dd{x}^{\mu_{P(1)}} \otimes \dd{x}^{\mu_{P(2)}}
+                        \otimes \cdots \otimes \dd{x}^{\mu_{P(r)}}
+        \end{equation}
+        ただし, $S(r)$を$r$次対照群とする.
+    \end{dfn}
+    $r$次微分形式は次の性質をもつ.
+    \begin{prop}{微分形式の性質}{微分形式の性質}
+        \begin{enumerate}[(i)]
+            \item $\dd{x}^{\mu_1} \wedge \cdots
+                        \wedge \dd{x}^{\mu_i} \wedge \cdots
+                                \wedge \dd{x}^{\mu_i} \wedge \cdots
+                                    \wedge \dd{x}^{\mu_r} = 0$.
+            \item $\dd{x}^{\mu_1} \wedge \cdots \wedge \dd{x}^{\mu_r}
+                    = \sgn(P) \dd{x}^{\mu_{P(1)}} \wedge \cdots
+                        \wedge \dd{x}^{\mu_{P(r)}}$.
+            \item $\dd{x}^{\mu_1} \wedge \cdots \wedge \dd{x}^{\mu_r}$は各$\dd{x}^{\mu_i}$に対して線形である.
+        \end{enumerate}
+    \end{prop}
+    点$p \in M$における$r$次微分形式全体からなるベクトル空間を$\Omega_p^r(M)$と記述する. 通常, $\Omega_p^r(M)$の任意の元$\omega$は
+    \begin{equation}
+        \omega = \frac{1}{r!}\omega_{\mu_1\mu_2\ldots\mu_r}
+                    \dd{x}^{\mu_1} \wedge \dd{x}^{\mu_2}
+                        \wedge \cdots \wedge \dd{x}^{\mu_r}
+    \end{equation}
+    と表す.
+
+    $(1,2,\ldots,m)$から$(\mu_1,\mu_2,\ldots,\mu_r)$を選ぶから, $\Omega_p^r(M)$の次元は,
+    \begin{equation}
+        \mqty(m \\ r) = \frac{m!}{(m-r)!r!}
+    \end{equation}
+    である. 便宜上のため, $\Omega_p^0(M)=\mathbb{R}$とする. $r>m$であるとき, すべての元について, 同じ添え字が現れるので, $\Omega_p^r(M)$の元は恒等的にゼロである.
+    また, $\mqty(m \\ r) = \mqty(m \\ m-r)$から, $\dim\Omega_p^r(M)=\dim\Omega_p^{m-r}(M)$がわかり, $\Omega_p^r(M)$と$\Omega_p^{m-r}(M)$は同型である.
+
+    微分形式を表すために使われた記号$\wedge$を, $q$次微分形式と$r$次微分形式間の演算子として, 外積$\wedge$をを次のように定義する.
+    \begin{dfn}{外積（ウェッジ積）}{外積（ウェッジ積）}
+        多様体$M$の点$p$における$q$次微分形式$\Omega_p^q(M)$と$r$次微分形式$\Omega_p^r(M)$に対して,
+        \boldred{外積（exterior product）}または\boldred{ウェッジ積（wedge product）}
+        \begin{equation}
+            \begin{array}{cccc}
+                \wedge:
+                    & \Omega_p^q(M)\times\Omega_p^r(M)
+                        & \longmapsto & \Omega_p^{q+r}(M) \\
+                    & \rotatebox{90}{$\in$} & & \rotatebox{90}{$\in$} \\
+                    &(\omega,\xi) &\longmapsto & \omega \wedge \xi
+            \end{array}
+        \end{equation}
+        を$\displaystyle
+            \omega = \frac{1}{q!}\omega_{\mu_1\ldots\mu_q}
+                        \dd{x}^{\mu_1} \wedge \cdots \wedge \dd{x}^{\mu_q},\
+            \xi = \frac{1}{r!}\xi_{\nu_1\ldots\nu_r}
+                        \dd{x}^{\nu_1} \wedge \cdots \wedge \dd{x}^{\nu_r}
+        $として,
+        \begin{equation}
+            \omega\wedge\xi \coloneqq\frac{1}{q!r!}
+                \omega_{\mu_1\ldots\mu_q}\xi_{\mu_{q+1}\ldots\mu_{q+r}}
+                    \dd{x}^{\mu_1} \wedge \cdots \wedge \dd{x}^{\mu_{q+r}}
+        \end{equation}
+        と定義する.
+    \end{dfn}
+\subsection{外微分}
+    \begin{dfn}{外積}{外積}
+        \boldred{外積（exterior derivative）}$\mathrm{d}_r:\Omega^r(M)\mapsto\Omega^{r+1}(M)$を
+        $r$次微分形式$\displaystyle \omega = \frac{1}{r!}\omega_{\mu_1\ldots\mu_r}\dd{x}^{\mu_1} \wedge \cdots \wedge \dd{x}^{\mu_r}$への作用として,
+        \begin{equation}
+            \mathrm{d}_r\omega \coloneqq \frac{1}{r!}
+                \qty(\pdv{x^\nu}\omega_{\mu_1\ldots\mu_r})
+                    \dd{x}^\nu \wedge \dd{x}^{\mu_1} \wedge
+                        \cdots \wedge \dd{x}^{\mu_r}
+        \end{equation}
+        として定義する.
+    \end{dfn}
+    普通は外微分の添字$r$を省略する.
+
+    \begin{exm}{}{}
+        \begin{enumerate}[(a)]
+            \item $\displaystyle
+                \dd{\omega_0}
+                    = \pdv{f}{x}\dd{x} + \pdv{f}{y}\dd{y} + \pdv{f}{z}\dd{z}$.
+            \item \small $\displaystyle
+                \dd{\omega_1}
+                    = \qty(\pdv{\omega_y}{x}-\pdv{\omega_x}{y})
+                            \dd{x} \wedge \dd{y}
+                    + \qty(\pdv{\omega_z}{y}-\pdv{\omega_y}{z})
+                            \dd{y} \wedge \dd{z}
+                    + \qty(\pdv{\omega_x}{z}-\pdv{\omega_z}{x})
+                            \dd{z} \wedge \dd{x}$. \normalsize
+            \item $\displaystyle
+                \dd{\omega_2}
+                    = \qty(\pdv{\omega_{yz}}{x} + \pdv{\omega_{zx}}{y}
+                            + \pdv{\omega_{xy}}{z})
+                                \dd{x} \wedge \dd{y} \wedge \dd{z}$.
+            \item $\dd{\omega_3} = 0$.
+        \end{enumerate}
+    \end{exm}
+    ベクトル解析の意味での$\mathrm{d}$の$\omega_0$への作用は$\mathrm{grad}$, $\omega_1$への作用は$\mathrm{rot}$, $\omega_2$への作用は$\mathrm{div}$と同一視できる.
+
+    また, 外微分は次の性質をもつ.
+    \begin{prop}{外微分の性質}{外微分の性質}
+        \begin{enumerate}[(i)]
+            \item $\xi\in\Omega^q(M), \omega\in\Omega^r(M)$とする. このとき,
+                    \begin{equation}
+                        \dd(\xi \wedge \omega)
+                            = \dd{\xi}\wedge\omega
+                                + (-1)^{q}\xi\wedge\dd{\omega}.
+                    \end{equation}
+            \item 任意の$\omega\in\Omega_p^r(M)$に対して,
+                \begin{equation}
+                    \mathrm{d}_{r+1} \mathrm{d}_r \omega = 0.
+                \end{equation}
+        \end{enumerate}
+    \end{prop}
+    \begin{prf}{}{}
+        \begin{enumerate}[(i)]
+            \item $\displaystyle
+                    \omega = \frac{1}{q!}\omega_{\mu_1\ldots\mu_q}
+                            \dd{x}^{\mu_1} \wedge \cdots \wedge \dd{x}^{\mu_q},\
+                    \xi = \frac{1}{r!}\xi_{\nu_1\ldots\nu_r}
+                            \dd{x}^{\nu_1} \wedge \cdots \wedge \dd{x}^{\nu_r}
+                    $とする.
+                \begin{align*}
+                    \dd(\xi \wedge \omega)
+                    &= \dd(\frac{1}{q!r!}
+                        \omega_{\mu_1\ldots\mu_q}\xi_{\nu_1\ldots\nu_r}
+                            \dd{x}^{\mu_1} \wedge \cdots \wedge
+                                \dd{x}^{\mu_q} \wedge \dd{x}^{\nu_1}
+                                    \cdots \wedge \dd{x}^{\nu_{r}}) \\
+                    &= \frac{1}{q!r!}\partial_\rho(\omega_{\mu_1\ldots\mu_q}
+                            \xi_{\nu_1\ldots\nu_r}) \\
+                    &\qquad\qquad \dd{x}^\nu \wedge \dd{x}^{\mu_1}
+                        \wedge \cdots \wedge \dd{x}^{\mu_q} \wedge
+                            \dd{x}^{\nu_1} \cdots \wedge \dd{x}^{\nu_{r}} \\
+                    &= \frac{1}{q!r!} \{
+                        (\partial_\rho\omega_{\mu_1\ldots\mu_q})
+                            \xi_{\nu_1\ldots\nu_r}
+                                + \omega_{\mu_1\ldots\mu_q}\partial_\rho
+                                    \xi_{\nu_1\ldots\nu_r}\} \\
+                    &\qquad\qquad \dd{x}^\rho \wedge \dd{x}^{\mu_1}
+                        \wedge \cdots \wedge \dd{x}^{\mu_q} \wedge
+                            \dd{x}^{\nu_1} \cdots \wedge \dd{x}^{\nu_{r}} \\
+                    &= \qty(\frac{1}{q!} \partial_\rho \omega_{\mu_1\ldots\mu_q}
+                        \dd{x}^\rho \wedge \dd{x}^{\mu_1} \wedge
+                            \cdots \wedge \dd{x}^{\mu_q}) \\
+                    &\qquad \wedge\qty(\frac{1}{r!} \xi_{\nu_1\ldots\nu_r}
+                        \dd{x}^{\mu_1} \wedge \cdots \wedge \dd{x}^{\mu_q}) \\
+                    &\qquad\qquad + (-1)^k \qty(\frac{1}{q!}
+                        \omega_{\nu_1\ldots\nu_q} \dd{x}^{\nu_1} \wedge
+                            \cdots \wedge \dd{x}^{\nu_r}) \\
+                    &\qquad\qquad\qquad \wedge \qty(\frac{1}{r!}
+                        \partial_\rho \xi_{\nu_1\ldots\nu_r} \dd{x}^\rho
+                            \wedge \dd{x}^{\nu_1} \wedge
+                                \cdots \wedge \dd{x}^{\nu_r}) \\
+                    &= \dd{\xi}\wedge\omega + (-1)^{q}\xi\wedge\dd{\omega}
+                \end{align*}
+            \item 略
+        \end{enumerate}
+    \end{prf}
+
+\subsection{内部積}
+    前項で定義した外微分は微分形式の次数を1つ上げる作用であったが, 逆に1つ下げる作用を考えられる.
+    \begin{dfn}{内部積}{内部積}
+        ベクトル場$X=X^\mu\partial_\mu$に対する\boldred{内部積（interior product）}$i_X$は, $\Omega^r(M)$から$\Omega^{r-1}(M)$への写像であり,
+        $r$次微分形式$\displaystyle \omega = \frac{1}{r!}\omega_{\mu_1\ldots\mu_r} \dd{x}^{\mu_1} \wedge \cdots \wedge \dd{x}^{\mu_r}$に対して,
+        \begin{equation}
+            i_X \omega \coloneqq \frac{1}{(r-1)!} X^{\mu_1}\omega_{\mu_1\ldots\mu_r} \dd{x}^{\mu_2} \wedge \cdots \wedge \dd{x}^{\mu_r}
+        \end{equation}
+        と定義する.
+    \end{dfn}
+
+\section{微分形式の積分}
+    \subsection{諸定義}
+        多様体$M$上の微分形式の積分は$M$が向き付け可能であるときに定義される.
+        アトラス$\{(U_i,\varphi_i)\}$で被覆される多様体とする.
+        $U_i \cap U_j = \emptyset$を満たす任意の$U_i,U_j$に対して,
+        Jacobian $J = \det\pdv*{x^\mu}{x^\nu}$が正となる$U_i$上の局所座標$\{x^\mu\}$と$U_i$上の局所座標$\{x^\nu\}$が存在するとき,
+        $M$は\textbf{向き付け可能（orientable）}であるという.
+
+        \begin{dfn}{微分形式の積分}{微分形式の積分}
+            $\{U_i\}$を$m$次元多様体$M$の開被覆としたとき, $m$次微分形式$\omega\in\Omega^m(M)$の積分を次で定義する.
+            \begin{equation}
+                \int_M \omega \coloneqq \sum_i \int_{U_i} \rho_i\omega
+            \end{equation}
+            ただし, 局所座標$\varphi_i=(x^1,\ldots,x^m)$を用いて,
+            \begin{equation}
+                \int_{U_i} \rho_i\omega = \int_{\varphi(U_i)} \rho(\varphi_i^{-1}(x)) \omega_{1\ldots m} \dd{x^1} \cdots \dd{x^m}
+            \end{equation}
+            である.
+        \end{dfn}
+
+    \subsection{Stokesの定理}
+        次に外微分と積分を繋ぐStokesの定理について述べる.
+        \begin{dfn}{Stokesの定理}{Stokesの定理}
+            向き付け可能な$m$次元多様体$M$に対して, その部分多様体を$N$とする.
+            このとき, $m-1$次微分形式$\omega\in\Omega^{m-1}(M)$は
+            \begin{equation}
+                \int_N \dd{\omega} = \int_{\partial N} \omega
+            \end{equation}
+            をみたす. 特に, $\partial N =\emptyset$であるとき,
+            \begin{equation}
+                \int_N \dd{\omega} = 0
+            \end{equation}
+            である.
+        \end{dfn}
+        \begin{prf}{}{}
+            次のような正方形領域$U_\alpha$に対して, $\varphi$を局所座標系として$N$を$\{\varphi_\alpha^{-1}(D_\alpha)\}$によって被覆する.
+            \begin{equation*}
+                D_\alpha = \{(x^1,\ldots,x^m)\in\mathbb{R}^m \mid a_\alpha^i<x^i<b_\alpha^i,a_\alpha^i,b_\alpha^i\in\mathbb{R}\}
+            \end{equation*}
+            $\rho_\alpha$を$D_\alpha$に付随する1の分割とすると,
+            \begin{equation*}
+                \int_N \omega = \sum_\alpha \int_{\varphi_\alpha^{-1}(D_\alpha)} \dd(\rho_\alpha \omega)
+            \end{equation*}
+            を得る.
+            ここで, $\omega = f_i(x^1,\ldots,x^m) \dd{x^1}\wedge\cdots\wedge\widehat{\dd{x^i}}\wedge\cdots\wedge\dd{x^m}$
+            （記号$\widehat{\dd{x^i}}$は$\dd{x^i}$を除くことを意味する）と表すと,
+            $\dd{\omega} = (-1)^{i-1} \partial_if_i \wedge\dd{x^1}\wedge\cdots\wedge\dd{x^i}\wedge\cdots\wedge\dd{x^m}$となる.
+            $\supp{\omega} \subset D_\alpha$としても一般性を失われないから,
+            \begin{enumerate}[(i)]
+                \item $\varphi_\alpha^{-1}(D_\alpha) \cap \partial M = \emptyset$であるとき,
+                        \begin{align*}
+                            \int_{\varphi_\alpha^{-1}(D_\alpha)} \dd{\rho_\alpha \omega}
+                                &= (-1)^{i-1}\int_{a_\alpha^1}^{b_\alpha^1}\cdots\int_{a_\alpha^m}^{b_\alpha^m}
+                                        \pdv{\rho_\alpha f_i}{x^i} \dd{x^1}\cdots\dd{x^m} \\
+                                &= (-1)^{i-1}\int_{a_\alpha^1}^{b_\alpha^1}\cdots\widehat{\int_{a_\alpha^i}^{b_\alpha^i}}\cdots\int_{a_\alpha^m}^{b_\alpha^m}
+                                        [\rho_\alpha f_i]_{x^i=a_\alpha^i}^{x^i=b_\alpha^i} \dd{x^1}\cdots\widehat{\dd{x^i}}\cdots\dd{x^m} \\
+                                &= 0
+                        \end{align*}
+                \item $\varphi_\alpha^{-1}(D_\alpha) \cap \partial M \ne \emptyset$であるとき, $H^m=\{(x^1,\ldots,x^m) \mid x^m\ge0\}$を用いて,
+                        $\partial N$の開被覆は$\{\varphi_\alpha^{-1}(D_\alpha \cap H^m)\}$とできる.
+                        $i\ne m$である項は(i)と同様に$0$となるから,
+                        \begin{align*}
+                            \int_{\varphi_\alpha^{-1}(D_\alpha)} \dd{\rho_\alpha \omega}
+                                &= (-1)^{m-1}\int_{a_\alpha^1}^{b_\alpha^1}\cdots\int_{a_\alpha^m}^{b_\alpha^m}
+                                        \pdv{\rho_\alpha f_i}{x^i} \dd{x^1}\cdots\dd{x^m} \\
+                                &= (-1)^{m-1} \int_{a_\alpha^1}^{b_\alpha^1}\cdots\int_{a_\alpha^{m-1}}^{b_\alpha^{m-1}}
+                                        [\rho_\alpha f_i]_{x^i=0}^{x^i=b_\alpha^i} \dd{x^1}\cdots\dd{x^{m-1}} \\
+                                &= (-1)^m \int_{a_\alpha^1}^{b_\alpha^1}\cdots\int_{a_\alpha^{m-1}}^{b_\alpha^{m-1}}
+                                        \rho_\alpha f_i(x^1,\ldots,x^{m-1},0) \dd{x^1}\cdots\dd{x^{m-1}} \\
+                                &= \int_{\varphi_\alpha^{-1}(D_\alpha \cap H^m)} \dd(\rho_\alpha f_i) |_{x^m=0}
+                        \end{align*}
+                        となり, 与式が示される.
+            \end{enumerate}
+        \end{prf}
+
+\section{押し出しと引き戻し}
+    \subsection{押し出し}
+        2つの多様体$M,N$間の滑らかな写像$f : M \mapsto N$が存在するとき, それに対応して接ベクトル間の写像が自然に誘導される.
+        \begin{equation}
+            \begin{array}{cccc}
+                f_* : & T_p(M)                & \longmapsto & T_{f(p)}(N) \\
+                      & \rotatebox{90}{$\in$} &             & \rotatebox{90}{$\in$} \\
+                      & X_p                   & \longmapsto & f_*X_p
+            \end{array}
+        \end{equation}
+        $N$上の関数$g(q)$に対して, $f(p)$との合成写像$g \circ f=g(f(p))$は$M$上の関数となる.
+        そこで, $X_p$を$g \circ f$によって$f_*X_p$を次のように定義する.
+        \begin{equation}
+            (f_*X_p)[g] = X_p[g \circ f]
+        \end{equation}
+        この$f_*$を$f$の押し出しという.
+        \begin{dfn}{押し出し}{押し出し}
+            $M,N$を多様体, $X_p \in T_p(M)$を点$p \in M$における接ベクトルとする.
+            滑らかな写像$f : M \mapsto N$と$N$上の関数$g : N \mapsto \mathbb{R}^m$に対して,
+            $f$の\boldred{押し出し}$f_* : T_p(M) \mapsto T_p(N)$を次のように定義する.
+            \begin{equation}
+                (f_*X_p)[g] \coloneqq X_p[g \circ f]
+            \end{equation}
+        \end{dfn}
+        $M,N$の局所座標系$\varphi,\phi$による$p$の座標を$\varphi(p)=(x^1,\ldots,x^m)$,
+        $f(p)$の座標を$\phi(f(p)) = (f^1(x^1,\ldots,x^m),\ldots,f^m(x^1,\ldots,x^m))=(y^1,\ldots,y^m)$とする.
+        このとき,
+        \begin{align}
+            X_p[g \circ f(p)] &= X_p^\mu \eval{\pdv{x^\mu}g \circ f}_p \nonumber \\
+                              &= X_p^\mu \eval{\pdv{f^\nu}{x^\mu}\pdv{g}{y^\nu}}_p \nonumber \\
+                              &= Y_p^\nu \eval{\pdv{g}{y^\nu}}_{f(p)}
+        \end{align}
+        となるから, $f_*$の具体的な形が求まる.
+        \begin{equation}
+            f_*X_p = X_p^\mu \eval{\pdv{f^\nu}{x^\mu}\pdv{y^\nu}}_{f(p)}
+        \end{equation}
+
+    \subsection{引き戻し}
+        接ベクトル間の写像$f_*$があるように, 余接ベクトル間の写像$f^*$を考えることもできる.
+        余接ベクトルは元々接ベクトルの双対写像であるから,
+        余接ベクトル$\omega \in T_{f(p)}^*(N)$を$f_*X_p \in T_{f(p)}(N)$に作用させると,
+        \begin{equation*}
+            \omega (f_*X_p) = \omega_\mu \dd{y^\mu} X^\nu \pdv{y^\rho}{x^\nu}\pdv{y^\rho}
+                            = \omega_\mu X^\nu \pdv{y^\rho}{x^\nu} \delta\indices{^\mu_\rho}
+                            = \omega_\mu X^\nu \pdv{f^\mu}{x^\nu}
+        \end{equation*}
+        を得る. ここで, 押し出し$f_*$によって$X_p$を$M$上の接ベクトルから$N$上の接ベクトルに移してから, $N$上の余接ベクトル$\omega$を作用させた.
+        そこで, $f^*\omega$を
+        \begin{equation}
+            f^*\omega \coloneqq \omega_\mu \pdv{f^\mu}{x^\nu} \dd{x^\nu}
+        \end{equation}
+        とすると, $X_p$の代わりに$\omega$を$M$上の余接ベクトルに写してから$X_p$に作用して, 同じ値を得ることも可能である.
+        \begin{equation*}
+            f^*\omega X_p = \omega_\mu \pdv{f^\mu}{x^\nu} \dd{x^\nu} X^\rho \pdv{x^\rho}
+                          = \omega_\mu \pdv{f^\mu}{x^\nu} X^\rho \delta\indices{^\nu_\rho}
+                          = \omega_\mu X^\nu \pdv{f^\mu}{x^\nu}
+        \end{equation*}
+        このようにして$f$の引き戻しを定義する.
+        \begin{dfn}{引き戻し}{引き戻し}
+            2つの多様体$M,N$間の滑らかな写像$f : M \mapsto N$を考える.
+            点$p \in M$における接ベクトル$X_p$と$f(p)$における余接ベクトル$\omega$に対して,
+            $f$\boldred{引き戻し}を押し出し$f_*$を用いて,
+            \begin{equation}
+                (f^*\omega) X_p \coloneqq \omega (f_*X_p)
+            \end{equation}
+            と定義する.
+        \end{dfn}
+\end{document}

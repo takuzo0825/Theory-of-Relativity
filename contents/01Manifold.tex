@@ -1,0 +1,214 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+\chapter{多様体論}
+\section{位相空間}
+    現代数学はすべて集合論の言葉で記述される.
+    空間も例外ではなく,
+    集合論の枠組みにおいて空間とは位相空間を指す.
+
+    \subsection{位相空間の定義}
+        \begin{dfn}{位相空間}{位相空間}\label{dfn:topological space}
+            集合$X$のある部分集合族$\mathcal{T} = \{U_i \mid i \in I\}$が次の３つの条件をみたすとき, $\mathcal{T}$を$X$の\boldred{位相（topology）}とよび,
+            $(X,\mathcal{T})$を\boldred{位相空間（topological space）}という.
+            \begin{enumerate}[(i)]
+                \item $\emptyset, X \in \mathcal{T}$.
+                \item 任意の部分集合$J \subset I$に対して, 部分集合族$\{U_j \mid j \in J\}$は$\bigcup_{j \in J}U_j \in \mathcal{T}$をみたす.
+                \item 任意の有限集合$K \subset I$に対して, 部分集合族$\{U_k \mid k \in K\}$は$\bigcap_{k \in k}U_k \in \mathcal{T}$をみたす.
+            \end{enumerate}
+        \end{dfn}
+        集合$X$に位相$\mathcal{T}$を入れると, 位相空間になる. しばしば, $(X,\mathcal{T})$の$\mathcal{T}$を省略して, $X$だけで位相空間という.
+        位相空間$X$の個々の元を\textbf{点}という.
+
+        $\mathcal{T}$は$X$の\textbf{開集合系}とよばれることもあり, $X$の部分集合$U_i$が$\mathcal{T}$に属するとき, $U_i$は$X$の\textbf{開集合}という.
+
+        \begin{exm}{}{}
+            ２つの位相空間の間には連続写像の概念が定義できる.
+            \begin{enumerate}[(a)]
+                \item 位相$\mathcal{T}$を$X$のすべての部分集合全体からなる集合族で定めると, $(X,\mathcal{T})$は位相空間となる.
+                        このようにして$X$に定める位相を\textbf{離散位相}という.
+                \item $\mathcal{T}=\{\emptyset, X\}$とすると, $\mathcal{T}$は位相となる.
+                        このような位相を\textbf{密着位相}という.
+                \item 点$x,y\in\mathbb{R}$の距離を$d(x,y)$と表したとき, 次式で定義される点$a \in \mathbb{R}$周りの$\varepsilon$近傍の集合族は$\mathbb{R}^n$の位相を定める.
+                        このような位相を$\mathbb{R}^n$の\textbf{自然な位相}という.
+                            \begin{equation*}
+                                U_\varepsilon(a) = \{x \in \mathbb{R}^n \mid d(x,y)<\varepsilon\}
+                            \end{equation*}
+                \item 実数$a$に対して, $a$より大きい実数全体からなる集合を$U_a = \{x\in\mathbb{R} \mid a<x\}$とおき,
+                        $U_a$という形の$\mathbb{R}$の部分集合全体と, 空集合と$\mathbb{R}$自身からなる集合族
+                            \begin{equation*}
+                                \mathcal{T} = \{U_a \mid a\in\mathbb{R}\} \cap \{\emptyset, \mathbb{R}\}
+                            \end{equation*}
+                        は$\mathbb{R}$の位相となる. しかし, 2つの空でない開集合は必ず交わってしまう.
+            \end{enumerate}
+        \end{exm}
+
+    \subsection{連続写像}
+        2つの位相空間には連続写像の概念が定義できる.
+        \begin{dfn}[label=dfn:continuous map]{連続}{連続}
+            $X,Y$を位相空間とする. 写像$f:X \mapsto Y$が\boldred{連続}であるとは, $Y$の任意の開集合$U$について, その逆像$f^{-1}(U)$が$X$の開集合であることをいう.
+        \end{dfn}
+        この定義は我々が直感的にもつ連続性の概念に一致する.
+
+        我々まだ空間についての等しいや異なるなどを定義してなく, 空間を分類することができない.
+        トポロジー研究においてある空間を連続的に変形してある空間になるならば, その２つの空間は同じ空間として扱う.
+        より数学的には次の同相写像によって議論される.
+        \begin{dfn}{同相写像}{同相写像}
+            $X,Y$を位相空間とする. 写像$f:X \mapsto Y$が次の条件をみたすとき, $f$を\boldred{同相写像（homeomorphism）}とよぶ. $X$と$Y$の間に同相写像が存在するとき, $X$と$Y$は\boldred{位相同相（homeomorphic）}あるいは単に\boldred{同相である}といい, $X \cong Y$とかく.
+            \begin{enumerate}[(i)]
+                \item $f:X \mapsto Y$は全単射である.
+                \item $f:X \mapsto Y$も逆写像$f^{-1}Y \mapsto X$も連続写像である.
+            \end{enumerate}
+        \end{dfn}
+        連続写像$f:X \mapsto Y, g:Y \mapsto X$が存在して, $f \circ g = \id_Y, g \circ f = \id_X$であるときも$X$と$Y$は同相である.
+
+        同相は同値関係であり, 同値類に分けることができる.
+
+    \subsection{部分空間}
+        \begin{dfn}{部分空間}{部分空間}
+            $(X,\mathcal{T})$を位相空間, $A$を$X$の任意の部分集合とする.
+            次で定義される$A$の部分集合族$\mathcal{T}_A$を, $X$の位相$\mathcal{T}$から導かれた$A$の\boldred{相対位相}とよび,
+            位相空間$(A,\mathcal{T}_A)$を$(X,\mathcal{T})$の\boldred{部分空間}という.
+            \begin{equation}
+                \mathcal{T}_A \coloneqq \{U \cap A \mid U \in \mathcal{T}\}
+            \end{equation}
+        \end{dfn}
+        通常, 位相空間$X$の部分集合$A$には相対位相を入れるものとする.
+
+        \begin{exm}{}{}
+            $(X,\mathcal{T})$と$(Y,\mathcal{T}')$を位相空間とする.
+            \begin{enumerate}[(a)]
+                \item 直積$X \times Y$に対して, $X$の開集合$U$と$Y$の開集合$V$の直積$U_i \times V_i$は, $X \times Y$の部分集合である.
+                        $U \times V$という形をした$X \times Y$の部分集合の任意個の和集合からなる集合族
+                        \begin{equation*}
+                            \mathcal{T}_{X \times Y} \coloneqq \qty{\bigcap_i U_i \times V_i \mid U_i\in\mathcal{T},V_i\in\mathcal{T}'}
+                        \end{equation*}
+                        は$X \times Y$の位相を定める.
+                        よって, $\mathcal{T}_{X \times Y}$を\textbf{積位相}といい, $(X \times Y,\mathcal{T}_{X \times Y})$を,
+                        $(X,\mathcal{T})$と$(Y,\mathcal{T}')$を\textbf{積空間}という.
+                \item $\mathcal{T}_f$を\textbf{商位相}といい, $(X,\mathcal{T}_f)$を$f:X \mapsto Y$による$(X,\mathcal{T})$の\textbf{商空間}という.
+            \end{enumerate}
+        \end{exm}
+    \subsection{Hausdorff空間}
+        位相空間$X$の部分集合$N$が点$x \in X$を含むようなある開集合が少なくとも１つ存在するとき, $N$は$x$の\textbf{近傍}であるという. これは$N$自身が開集合であることを必ずしも要請していない. もし$N$自身が開集合であるときは, $N$は$x$の\textbf{開近傍}という.
+        \begin{dfn}{Hausdorff空間}{Hausdorff空間}
+            位相空間$(X,\mathcal{T})$が\boldred{Hausdorff空間}であるとは, 任意の異なる点$x,y \in X$に対して, $U_x \cap U_y = \emptyset$をみたすような $x$の近傍$U_x$と$y$の近傍$U_y$が存在することをいう.
+        \end{dfn}
+
+    \subsection{閉集合}
+        $(X,\mathcal{T})$を位相空間とする. $X$の部分集合$A$が\textbf{閉集合}であるとは, $A$の補集合$X-A$が開集合であることをいう. すなわち$X-A\in\mathcal{T}$である. $X$の補集合$\emptyset$は開集合であることから, $X$は開集合でもあり閉集合でもある. $\emptyset$も同様に開集合でもあり閉集合でもある.
+
+        \begin{dfn}{触点と閉包}{触点と閉包}
+            $(X,\mathcal{T})$を位相空間とする. 部分集合$A \in X$に対して, 点$p \in X$が$A$の\boldred{触点}であるとは, $p$の任意の開近傍$U_p$が$A$と交わることをいう.
+            $A$の触点全体の集合を$A$の\boldred{閉包}とよび, $\overline{A}$とかく.
+        \end{dfn}
+        触点はどんな近くでも$A$の点が存在することを意味する. $\overline{A}$は$A$を含むような最小の閉集合である.
+
+        また, $A$の最大の部分開集合を\textbf{内部}とよび, $A^\circ$と表す. $\overline{A}$における$A^\circ$の補集合を$A$の\textbf{境界}という.
+        閉包はいつでも境界を含み, 内部は境界と交わることはない.
+
+    \subsection{コンパクト性}
+        位相空間$X$の部分集合族$\{A_i \mid i \in I\}$が$X$の\textbf{被覆}であるとは,
+        \begin{equation}
+            X = \bigcup_{i \in i}U_i
+        \end{equation}
+        をみたすことをいう. すべての$A_i$が$X$の開集合であるとき, この被覆を\textbf{開被覆}という.
+        \begin{dfn}{コンパクト}{コンパクト}
+            位相空間$X$が\boldred{コンパクト}であるとは, $X$の任意の開被覆$\{U_i \mid i \in I\}$に対しても, $I$のある有限部分集合$J$が存在して, $\{U_j \mid j \in J\}$もまた$X$の開被覆であることをいう.
+        \end{dfn}
+        コンパクトな位相空間を\textbf{コンパクト空間}という. $X$の各点が有限個の開集合$\{U_i\}$によって被覆されるとき, $X$は\textbf{パラコンパクト}であるという.
+
+\section{多様体}
+    多様体とは局所的に$\mathbb{R}^m$に同相とみなせる位相空間である.
+    この項では多様体の厳密な定義について述べる.
+    \subsection{局所座標}
+        \begin{dfn}{座標近傍}{座標近傍}
+            位相空間$X$の開集合$U$から$\mathbb{R}^m$のある開集合$U'$への同相写像
+            \begin{equation}
+                \varphi : U \mapsto U'
+            \end{equation}
+            があるとき, $\varphi$と$U$の組$(U,\varphi)$を$m$次元\boldred{座標近傍（coordinate neighborhood）}といい,
+            $U$を\boldred{座標近傍}, $\varphi$を$U$上の\boldred{局所座標系}という.
+        \end{dfn}
+
+    \subsection{多様体の定義}
+        \begin{dfn}{$m$次元多様体}{$m$次多様体}
+            位相空間$M$が以下の条件をみたすとき, $M$を\boldred{$m$次元多様体（ topological manfold）}という.
+            \begin{enumerate}[(i)]
+                \item $M$はHausdorff空間である.
+                \item \boldred{チャート（chart）}とよばれる$X$の開集合$U_i$と$U_i$から$\mathbb{R}^m$のある開集合$U'$への同相写像$\varphi_i: U \mapsto U'$の組$(U_i,\varphi_i)$と, \boldred{アトラス（atlas）}よばれるチャート全体の集合$\{(U_i,\varphi_i)\}$が存在して, 開集合族$\{U_i\}$は$X$を被覆する.
+            \end{enumerate}
+        \end{dfn}
+        といい,  $\varphi_j$を\textbf{座標関数}という.
+        任意の点$p \in U$に対して, $\varphi(p)$は$\mathbb{R}^m$の点であるから, $m$個の実数$x_i$を用いて,
+        \begin{equation}
+            \varphi(p) = (x^1(p),x^2(p),\ldots,x^m(p))
+        \end{equation}
+        と表せる. この$(x^1,x^2,\ldots,x^n)$を$(U,\varphi)$に関する$p$の\textbf{局所座標}という.
+
+        \begin{exm}{}{}
+            \begin{enumerate}[(a)]
+                \item $\mathbb{R}^m$は最も簡単な多様体である. 実際に座標関数として恒等写像$\id_{\mathbb{R}^m}$をとると, $(\mathbb{R}^m, \id_{\mathbb{R}^m})$はチャートかつアトラスになる.
+            \end{enumerate}
+        \end{exm}
+
+        多様体$M$のチャート$(U,\varphi),(V,\phi)$に対して, ２つの座標近傍$U$と$V$が交わる場合を考える. 共通部分$U \cap V$に属する点$p$は$\varphi$によって$\varphi(p)=(x^1,x^2,\ldots,x^m)$という局所座標で表せ, $\phi$によっても$\phi(p)=(y^1,y^2,\ldots,y^m)$で表せる. すなわち２種類の局所座標で表すことができる.  $\varphi$は同相写像であるから, 逆写像$\varphi^{-1}$が存在して, $p=\varphi^{-1}(x^1,x^2,\ldots,x^m)$をみたす. これから合成写像$\phi\circ\varphi$を定義でき,
+        \begin{equation}
+            \begin{array}{cccc}
+                \phi\circ\varphi^{-1}:
+                    &\varphi(U \cap V) & \longmapsto & \phi(U \cap V) \\
+                    & \rotatebox{90}{$\in$} & & \rotatebox{90}{$\in$} \\
+                    &(x^1,x^2,\ldots,x^m) &\longmapsto & (y^1,y^2,\ldots,y^m)
+            \end{array}
+        \end{equation}
+        は２つの局所座標の関係を示し, $\phi\circ\varphi^{-1}$は\textbf{座標変換}を行っている.
+
+        座標変換を考えることで, 微分多様体を考えることができる.
+        \begin{dfn}{可微分多様体}{可微分多様体}
+            $\{U_i,\varphi_i\}$を多様体$M$のアトラスとする. $U_i \cap U_j \ne \emptyset$をみたす任意の$i,j$に対して, 座標変換
+            \begin{equation}
+                \varphi_j\circ\varphi_i^{-1}: \varphi_i(U_i \cap U_j) \mapsto \varphi_j(U_i \cap U_j)
+            \end{equation}
+            は$C^r$級であるとき, $M$は$m$次元\boldred{$C^r$級可微分多様体（differential   manifold）}であるという.
+        \end{dfn}
+        $C^r$級可微分多様体は簡単に$C^r$級多様体とも呼ばれる.
+        また, $M$が$C^\infty$級であるとき微分多様体という.
+
+    \subsection{微分同相}
+        $f$を多様体$M$から多様体$N$への写像とする. $p \in U,f(p) \in V$となるように$M$上のチャート$(U,\varphi)$と$N$上のチャート$(V,\phi)$を選ぶ. このとき, 合成写像$\phi \circ f \circ \varphi^{-1}$は実ベクトル関数となり, 微積分が定義される. この$\phi \circ f \circ \varphi^{-1}$が$C^s$級であるとき, $f$は\textbf{$C^s$級写像}という. $f$は$C^s$級写像であることはチャートやアトラスの選び方に依らない.
+        \begin{dfn}{微分同相}{微分同相}
+            $C^r$級多様体$M,N$の間の写像$f:M \mapsto N$が同相写像であり, $f$とその逆写像$f^{-1}$がともに$C^s$級であるとき, $f$は\boldred{$C^s$級微分同相写像（$C^s$ diffeomorphism）}という. また, $M$と$N$の間に$C^s$級微分同相写像が存在するとき, $M$と$N$は\boldred{$C^s$級微分同相（$C^s$ diffeomorphic）}であるといい, $M \equiv N$と表す.
+        \end{dfn}
+        同相写像による分類は, ある空間から別の空間へ連続的に変形できるかによるものであった. 微分同相の場合は, 滑らかに変形できるかによる分類である. ２つの多様体が微分同相である場合は同じ多様体とみなす.
+
+\section{接ベクトル}
+    多様体$M$における開曲線は開区間$(a,b)\subset\mathbb{R}$から$M$への写像$C$のことである.
+    \begin{equation}
+        \begin{array}{ccc}
+            (a,b)  & \longmapsto & M \\
+            \rotatebox{90}{$\in$} & & \rotatebox{90}{$\in$} \\
+            t & \longmapsto & C(t)
+        \end{array}
+    \end{equation}
+    $t$を時間としてみたとき, $C(t)$はある物体の道のりとして考えられる.  速度ベクトルすなわち$t$についての微分を求めたいが, 多様体上の微分は定義されていない. そこで, 一度ある関数$f:M \mapsto \mathbb{R}$との合成写像$f(c(t))$の微分を考える. 曲線を局所座標$\varphi_i \circ C(t)=(x^1(t),x^2(t),\ldots,x^m(t))$を用いると,
+    \begin{equation}
+        \dv{f(c(t))}{t} = \dv{x^\mu(t)}{t}\pdv{f\circ\varphi_i^{-1}}{x^\mu}
+                        \coloneqq X^\mu\pdv{x^\mu}f\circ\varphi_i^{-1}
+    \end{equation}
+    となる. $f$は微分を考えるために, 便宜上導入したものであるから, $X\coloneqq X^\mu \pdv*{x^\mu}$に注目してみる. ここで, 偏微分作用素の組$\{\pdv*{x^\mu}\}$はベクトル空間を形成し, $\pdv*{x^\mu}$は基底, $X^\mu$はその成分とみなせる. $\{\pdv*{x^\mu}\}$が張るベクトル空間は,  $X$は一見局所座標の取り方に依存するように感じるが, 別の局所座標$\psi \circ C(t)=(y^1(t),y^2(t),\ldots,y^m(t))$に変えてみると,  $X$を任意のとして,
+    \begin{equation}
+        X = X^\mu\pdv{x^\mu}
+          = X^\mu \pdv{y^\nu}{x^\mu}\pdv{y^\nu}
+          = Y^\nu \pdv{y^\nu}
+    \end{equation}
+    となるため, ベクトル空間は局所座標に依らないことが確認できる. この偏微分作用素が張るベクトル空間を接ベクトル空間という.
+
+    \begin{dfn}{接ベクトル空間}{接ベクトル空間}
+        $m$次元微分多様体$M$上の点$p$の局所座標を$\varphi(p)=(x^1,x^2,\ldots,x^m)$とする. $p$における\boldred{接ベクトル空間（tangent vector space）}とは,
+        $m$個の偏微分作用素
+        \begin{equation}
+            \qty(\pdv{x^1})_p, \qty(\pdv{x^2})_p, \ldots, \qty(\pdv{x^m})_p
+        \end{equation}
+        が張るベクトル空間のことをいい, $T_p(M)$と表す. また, $T_p(M)$の元を$p$における\boldred{接ベクトル（tangent vector）}とよぶ.
+    \end{dfn}
+\end{document}

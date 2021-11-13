@@ -9,20 +9,22 @@
 \begin{document}
     % 表紙
     \maketitle
-    
+
     % 目次
     \tableofcontents
     \clearpage
 
     % 第0章 まえがき
     \addcontentsline{toc}{chapter}{まえがき}
-    \subfile{contents/Introduction.tex}
+    \subfile{contents/00Introduction.tex}
 
     % 第1章 多様体論
-    \subfile{contents/manifold.tex}
-    
+    \subfile{contents/01Manifold.tex}
+
+    % 第2章 微分形式
+    \subfile{contents/02DifferentialForm.tex}
+
     % 参考文献
     \addcontentsline{toc}{chapter}{参考文献}
     \printbibliography[title=参考文献]
-    
 \end{document}
